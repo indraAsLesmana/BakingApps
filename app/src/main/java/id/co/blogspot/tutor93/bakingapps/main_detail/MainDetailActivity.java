@@ -53,7 +53,7 @@ public class MainDetailActivity extends AppCompatActivity {
                     getIntent().getStringExtra(MainDetailFragment.ARG_ITEM_ID));
             MainDetailFragment fragment = new MainDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
