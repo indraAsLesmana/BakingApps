@@ -22,8 +22,6 @@ public interface RemoteView {
 
     void hideProgress();
 
-    void showUnauthorizedError();
-
     void showEmpty();
 
     void showError(String errorMessage);

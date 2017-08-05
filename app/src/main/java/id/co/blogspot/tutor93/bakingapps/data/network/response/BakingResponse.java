@@ -1,4 +1,4 @@
-package id.co.blogspot.tutor93.bakingapps.data.network;
+package id.co.blogspot.tutor93.bakingapps.data.network.response;
 
 import java.util.List;
 
