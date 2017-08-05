@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.main.MainListActivity;
 import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
@@ -35,6 +37,8 @@ public class MainDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+    @BindView(R.id.item_recipename) TextView mRecipeName;
+
     public MainDetailFragment() {
     }
 
@@ -60,10 +64,11 @@ public class MainDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.item_recipecard, container, false);
+        ButterKnife.bind(this, rootView);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_recipename)).setText(mItem.details);
+            mRecipeName.setText(mItem.details);
         }
 
         return rootView;
