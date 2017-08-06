@@ -42,7 +42,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final BakingResponse mItem = mValues.get(position);
         holder.mIdView.setText(mItem.name);
         holder.mContentView.setText(String.valueOf(mItem.servings));
@@ -52,7 +52,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putInt(MainDetailFragment.ARG_ITEM_ID, mItem.id);
+                    arguments.putParcelable(MainDetailFragment.ARG_ITEM_ID, mValues.get(position));
                     MainDetailFragment fragment = new MainDetailFragment();
                     fragment.setArguments(arguments);
                     ((Activity) v.getContext()).getFragmentManager()
@@ -62,7 +62,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                 } else {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MainDetailActivity.class);
-                    intent.putExtra(MainDetailFragment.ARG_ITEM_ID, mItem.id);
+                    intent.putExtra(MainDetailFragment.ARG_ITEM_ID, mValues.get(position));
 
                     context.startActivity(intent);
                 }
