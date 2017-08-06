@@ -70,7 +70,8 @@ public class MainDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, MainListActivity.class));
+//            NavUtils.navigateUpTo(this, new Intent(this, MainListActivity.class));
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

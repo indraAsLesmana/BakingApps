@@ -14,7 +14,6 @@ import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main.MainListActivity;
-import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -38,7 +37,7 @@ public class MainDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    @BindView(R.id.item_recipename) TextView mRecipeName;
+    @BindView(R.id.detail_itemrecipename) TextView mRecipeName;
 
     public MainDetailFragment() {
     }
@@ -69,7 +68,7 @@ public class MainDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            mRecipeName.setText(mItem.servings);
+            mRecipeName.setText(String.valueOf(mItem.servings));
         }
 
         return rootView;

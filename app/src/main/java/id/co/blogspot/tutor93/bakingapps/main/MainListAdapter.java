@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
-import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
 import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailActivity;
 import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailFragment;
 
@@ -77,7 +76,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
-        @BindView(R.id.item_recipename) TextView mIdView;
+        @BindView(R.id.detail_itemrecipename) TextView mIdView;
         @BindView(R.id.content) TextView mContentView;
 
         ViewHolder(View view) {
