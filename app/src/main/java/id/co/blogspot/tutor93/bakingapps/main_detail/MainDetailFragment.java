@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
+import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main.MainListActivity;
 import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
 
@@ -31,7 +32,7 @@ public class MainDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private BakingResponse mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,12 +51,12 @@ public class MainDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+//            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.name);
             }
         }
     }
@@ -68,7 +69,7 @@ public class MainDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            mRecipeName.setText(mItem.details);
+            mRecipeName.setText(mItem.servings);
         }
 
         return rootView;

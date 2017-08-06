@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
+import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
 import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailActivity;
 import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailFragment;
@@ -25,10 +26,10 @@ import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailFragment;
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
 
-    private final List<DummyContent.DummyItem> mValues;
+    private final List<BakingResponse> mValues;
     private final boolean mTwoPane;
 
-    public MainListAdapter(List<DummyContent.DummyItem> items, boolean twopane) {
+    public MainListAdapter(List<BakingResponse> items, boolean twopane) {
         mValues = items;
         mTwoPane = twopane;
     }
@@ -42,16 +43,16 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        final BakingResponse mItem = mValues.get(position);
+        holder.mIdView.setText(mItem.name);
+        holder.mContentView.setText(String.valueOf(mItem.servings));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(MainDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                    arguments.putInt(MainDetailFragment.ARG_ITEM_ID, mItem.id);
                     MainDetailFragment fragment = new MainDetailFragment();
                     fragment.setArguments(arguments);
                     ((Activity) v.getContext()).getFragmentManager()
@@ -61,7 +62,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                 } else {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MainDetailActivity.class);
-                    intent.putExtra(MainDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                    intent.putExtra(MainDetailFragment.ARG_ITEM_ID, mItem.id);
 
                     context.startActivity(intent);
                 }
@@ -74,23 +75,15 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        @BindView(R.id.item_recipename)
-        TextView mIdView;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        @BindView(R.id.item_recipename) TextView mIdView;
         @BindView(R.id.content) TextView mContentView;
 
-        public DummyContent.DummyItem mItem;
-
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             ButterKnife.bind(this, view);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
 

@@ -1,26 +1,21 @@
 package id.co.blogspot.tutor93.bakingapps.main;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
 
-import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
+import id.co.blogspot.tutor93.bakingapps.base.BaseActivity;
+import id.co.blogspot.tutor93.bakingapps.data.DataManager;
+import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailActivity;
-import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailFragment;
 
-import java.util.List;
 
 /**
  * An activity representing a list of Items. This activity
@@ -30,7 +25,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class MainListActivity extends AppCompatActivity {
+public class MainListActivity extends BaseActivity implements MainContract.MainAction {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -40,30 +35,66 @@ public class MainListActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.item_list) RecyclerView recyclerView;
 
+    private MainPresenter mMainPresenter;
+    private List<BakingResponse> recipeItems;
+    private MainListAdapter mainListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
         ButterKnife.bind(this);
 
+        initView();
+        mMainPresenter = new MainPresenter(DataManager.getInstance());
+        mMainPresenter.attachView(this);
+        mMainPresenter.onRecipesRequest();
+    }
+
+    private void initView() {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
-        if (findViewById(R.id.item_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
+        if (findViewById(R.id.item_detail_container) != null) { // large-screen layouts (res/values-w900dp).
             mTwoPane = true;
         }
+        setupRecipesList();
+    }
 
+    private void setupRecipesList() {
         assert recyclerView != null;
-        setupRecyclerView(recyclerView);
+        recipeItems = new ArrayList<>();
+        mainListAdapter = new MainListAdapter(recipeItems, mTwoPane);
+        recyclerView.setAdapter(mainListAdapter);
+    }
+
+    @Override
+    public void showDetailList(List<BakingResponse> recipes) {
+        recipeItems.addAll(recipes);
+        mainListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showProgress() {
 
     }
 
+    @Override
+    public void hideProgress() {
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new MainListAdapter(DummyContent.ITEMS, mTwoPane));
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+
+    }
+
+    @Override
+    public void showMessageLayout(boolean show) {
+
     }
 }

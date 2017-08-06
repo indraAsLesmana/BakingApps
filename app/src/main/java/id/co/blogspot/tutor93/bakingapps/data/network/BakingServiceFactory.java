@@ -19,11 +19,11 @@ public class BakingServiceFactory {
     private static final int HTTP_READ_TIMEOUT = 10000;
     private static final int HTTP_CONNECT_TIMEOUT = 6000;
 
-    public static BakingService makeDsfService() {
-        return makeDsfService(makeOkHttpClient());
+    public static BakingService makeBakingService() {
+        return makeBakingService(makeOkHttpClient());
     }
 
-    private static BakingService makeDsfService(OkHttpClient okHttpClient) {
+    private static BakingService makeBakingService(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
