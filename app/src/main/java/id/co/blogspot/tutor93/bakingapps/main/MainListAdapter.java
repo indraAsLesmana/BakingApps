@@ -44,7 +44,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final BakingResponse mItem = mValues.get(position);
         holder.mIdView.setText(mItem.name);
-        holder.mContentView.setText(String.valueOf(mItem.servings));
+        holder.mServing.setText(String.valueOf(mItem.servings));
+        holder.mStep.setText(String.valueOf(mItem.steps.size()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +78,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
         @BindView(R.id.detail_itemrecipename) TextView mIdView;
-        @BindView(R.id.serving) TextView mContentView;
+        @BindView(R.id.serving) TextView mServing;
+        @BindView(R.id.step) TextView mStep;
 
         ViewHolder(View view) {
             super(view);
