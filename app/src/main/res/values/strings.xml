@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="watch_video">Watch The Video</string>
+    <string name="step">Guide step</string>
+    <string name="serving">Total serving</string>
 </resources>

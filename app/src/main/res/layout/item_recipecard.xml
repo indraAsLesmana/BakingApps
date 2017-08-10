@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/pizza" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:orientation="horizontal">
@@ -23,14 +25,50 @@
                 android:id="@+id/detail_itemrecipename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/serving"
+                android:layout_alignBottom="@+id/serving"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:textSize="24sp"
                 tools:text="@string/app_name" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/content"
+                android:id="@+id/serving"
+                android:contentDescription="@string/serving"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="21dp"
+                android:layout_marginRight="21dp"
+                android:layout_toLeftOf="@+id/ingridient"
+                android:layout_toStartOf="@+id/ingridient"
+                android:drawableRight="@drawable/ic_serving"
+                android:drawableEnd="@drawable/ic_serving"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:text="0" />
 
-        </LinearLayout>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/ingridient"
+                android:contentDescription="@string/step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:drawableRight="@drawable/ic_step"
+                android:drawableEnd="@drawable/ic_step"
+                android:text="0" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
