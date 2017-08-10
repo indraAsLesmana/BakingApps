@@ -21,20 +21,20 @@ import id.co.blogspot.tutor93.bakingapps.main.MainListActivity;
  */
 public class MainDetailActivity extends AppCompatActivity {
 
-    @BindView(R.id.detail_toolbar) Toolbar toolbar;
+//    @BindView(R.id.detail_toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
+   /*     ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        }*/
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

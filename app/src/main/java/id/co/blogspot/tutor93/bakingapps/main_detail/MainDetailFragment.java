@@ -98,10 +98,10 @@ public class MainDetailFragment extends Fragment {
             mItem = getArguments().getParcelable(ARG_ITEM_ID);
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            /*CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.name);
-            }
+            }*/
         }
         mActivity = (AppCompatActivity) getActivity();
     }
