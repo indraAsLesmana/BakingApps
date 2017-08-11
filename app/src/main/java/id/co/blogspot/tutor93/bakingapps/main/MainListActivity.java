@@ -1,6 +1,9 @@
 package id.co.blogspot.tutor93.bakingapps.main;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
@@ -43,7 +46,7 @@ public class MainListActivity extends BaseActivity implements MainContract.MainA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
-        ButterKnife.bind(this);
+        ButterKnife.bind(this, MainListActivity.this);
 
         initView();
         mMainPresenter = new MainPresenter(DataManager.getInstance());
@@ -53,15 +56,24 @@ public class MainListActivity extends BaseActivity implements MainContract.MainA
 
     private void initView() {
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
         if (findViewById(R.id.item_detail_container) != null) { // large-screen layouts (res/values-w900dp).
             mTwoPane = true;
         }
+
         setupRecipesList();
     }
 
+    private void checkPhoneOrientation() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        }
+    }
+
     private void setupRecipesList() {
-        assert recyclerView != null;
+        checkPhoneOrientation();
+
         recipeItems = new ArrayList<>();
         mainListAdapter = new MainListAdapter(recipeItems, mTwoPane);
         recyclerView.setAdapter(mainListAdapter);

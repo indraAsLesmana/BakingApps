@@ -8,6 +8,5 @@
     android:layout_height="match_parent"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    app:layoutManager="LinearLayoutManager"
     tools:context="id.co.blogspot.tutor93.bakingapps.main.MainListActivity"
     tools:listitem="@layout/item_recipecard" />
