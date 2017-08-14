@@ -9,7 +9,6 @@ import id.co.blogspot.tutor93.bakingapps.base.BasePresenter;
 import id.co.blogspot.tutor93.bakingapps.data.DataManager;
 import id.co.blogspot.tutor93.bakingapps.data.network.RemoteCallback;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
-import id.co.blogspot.tutor93.bakingapps.main.dummy.DummyContent;
 import id.co.blogspot.tutor93.bakingapps.util.Helpers;
 
 /**

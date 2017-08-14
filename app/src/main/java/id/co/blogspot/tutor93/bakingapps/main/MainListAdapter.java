@@ -1,9 +1,7 @@
 package id.co.blogspot.tutor93.bakingapps.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
-import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailActivity;
-import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailFragment;
+import id.co.blogspot.tutor93.bakingapps.main_detail.ItemListActivity;
 
 /**
  * Created by indraaguslesmana on 8/5/17.
@@ -26,11 +23,9 @@ import id.co.blogspot.tutor93.bakingapps.main_detail.MainDetailFragment;
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
 
     private final List<BakingResponse> mValues;
-    private final boolean mTwoPane;
 
-    public MainListAdapter(List<BakingResponse> items, boolean twopane) {
+    public MainListAdapter(List<BakingResponse> items) {
         mValues = items;
-        mTwoPane = twopane;
     }
 
     @Override
@@ -50,22 +45,10 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTwoPane) {
-                    Bundle arguments = new Bundle();
-                    arguments.putParcelable(MainDetailFragment.ARG_ITEM_ID, mValues.get(position));
-                    MainDetailFragment fragment = new MainDetailFragment();
-                    fragment.setArguments(arguments);
-                    ((Activity) v.getContext()).getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.item_detail_container, fragment)
-                            .commit();
-                } else {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, MainDetailActivity.class);
-                    intent.putExtra(MainDetailFragment.ARG_ITEM_ID, mValues.get(position));
-
-                    context.startActivity(intent);
-                }
+                Context context = v.getContext();
+                Intent intent = new Intent(context, ItemListActivity.class);
+                intent.putExtra(ItemListActivity.ARG_RECIPES_ID, mValues.get(position));
+                context.startActivity(intent);
             }
         });
     }

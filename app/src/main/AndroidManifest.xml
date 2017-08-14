@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="id.co.blogspot.tutor93.bakingapps">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -28,6 +28,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="id.co.blogspot.tutor93.bakingapps.main.MainListActivity" />
+        </activity>
+        <activity
+            android:name=".main_detail.ItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".main_detail.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".main_detail.ItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="id.co.blogspot.tutor93.bakingapps.main_detail.ItemListActivity" />
         </activity>
     </application>
 

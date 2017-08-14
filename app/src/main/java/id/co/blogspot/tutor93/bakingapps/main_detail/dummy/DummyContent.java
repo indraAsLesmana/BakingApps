@@ -1,4 +1,4 @@
-package id.co.blogspot.tutor93.bakingapps.main.dummy;
+package id.co.blogspot.tutor93.bakingapps.main_detail.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
