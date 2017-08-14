@@ -7,4 +7,5 @@
     <string name="serving">Total serving</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="ingridient">Ingredients</string>
 </resources>
