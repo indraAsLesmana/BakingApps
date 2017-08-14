@@ -49,7 +49,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (mItemBakingRespose != null) getSupportActionBar().setTitle(mItemBakingRespose.name);
+        if (!mItemBakingRespose.name.isEmpty()) getSupportActionBar().setTitle(mItemBakingRespose.name);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
