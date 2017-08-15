@@ -2,6 +2,7 @@ package id.co.blogspot.tutor93.bakingapps.main_detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,14 +13,17 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import id.co.blogspot.tutor93.bakingapps.R;
 
+import id.co.blogspot.tutor93.bakingapps.data.model.Ingredient;
 import id.co.blogspot.tutor93.bakingapps.data.model.Step;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main_detail.dummy.DummyContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,11 +43,16 @@ public class ItemListActivity extends AppCompatActivity {
     private boolean mTwoPane;
     public static final String ARG_RECIPES_ID = "recipe_id";
     private BakingResponse mItemBakingRespose;
+    private ArrayList<TextView> mIngredientList = new ArrayList<>();
+    private LinearLayout mIngridientListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+
+        mIngridientListView = (LinearLayout) findViewById(R.id.ingridient_list);
 
         if (getIntent().getParcelableExtra(ARG_RECIPES_ID) != null)
             mItemBakingRespose = getIntent().getParcelableExtra(ARG_RECIPES_ID);
@@ -51,6 +60,24 @@ public class ItemListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (!mItemBakingRespose.name.isEmpty()) getSupportActionBar().setTitle(mItemBakingRespose.name);
+
+        if (mIngredientList.size() > 0) {
+            for (TextView tvIngredientView : mIngredientList) {
+                mIngridientListView.addView(tvIngredientView);
+            }
+        } else {
+            if (mItemBakingRespose.ingredients != null && mItemBakingRespose.ingredients.size() > 0) {
+                for (Ingredient ingredient : mItemBakingRespose.ingredients) {
+                    TextView textView = new TextView(this);
+                    textView.setTextColor(Color.BLACK);
+                    textView.setPadding(16, 8, 16, 8);
+                    textView.setText("- " + String.valueOf(ingredient.quantity) +
+                            String.valueOf(ingredient.measure) + " " + ingredient.ingredient);
+                    mIngridientListView.addView(textView);
+                    mIngredientList.add(textView);
+                }
+            }
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

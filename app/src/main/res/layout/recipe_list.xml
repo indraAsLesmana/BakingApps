@@ -1,59 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/header_ingridient"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        android:text="@string/ingridient"
-        android:textColor="@android:color/white"
-        android:textSize="21sp"
-        android:textStyle="bold" />
+        android:layout_height="0dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/ingridient_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/header_ingridient"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/item_list_content" />
+        <TextView
+            android:id="@+id/header_ingridient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="@string/ingridient"
+            android:textColor="@android:color/white"
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/header_step"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ingridient_list"
-        android:layout_gravity="top"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        android:text="@string/step"
-        android:textColor="@android:color/white"
-        android:textSize="21sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/ingridient_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/header_ingridient"
+            android:orientation="vertical" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recipe_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/header_step"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/item_list_content" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/header_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ingridient_list"
+            android:layout_gravity="top"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="@string/step"
+            android:textColor="@android:color/white"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recipe_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/header_step"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_list_content" />
+    </RelativeLayout>
+
+</ScrollView>
 
 
 
