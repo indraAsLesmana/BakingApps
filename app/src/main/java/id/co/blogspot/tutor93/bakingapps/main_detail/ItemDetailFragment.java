@@ -1,13 +1,18 @@
 package id.co.blogspot.tutor93.bakingapps.main_detail;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
@@ -35,6 +40,9 @@ public class ItemDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+    private AppCompatActivity mActivity;
+    private SimpleExoPlayerView exoPlayerView;
+
     public ItemDetailFragment() {
     }
 
@@ -48,25 +56,47 @@ public class ItemDetailFragment extends Fragment {
             // to load content from a content provider.
 //            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
             mItem = getArguments().getParcelable(ARG_ITEM_ID);
-
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.name);
-            }
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_detail, container, false);
+        View rootView = inflater.inflate(R.layout.activity_item_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.name);
-        }
+        initView(rootView);
+        checkOrientation(mActivity);
 
         return rootView;
     }
+
+    private void initView(View rootview) {
+        mActivity = (AppCompatActivity) getActivity();
+
+        exoPlayerView = (SimpleExoPlayerView) rootview.findViewById(R.id.exoPlayerView);
+    }
+
+    private void checkOrientation(Activity context) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE &&
+                !getResources().getBoolean(R.bool.isTablet)){
+            hideSystemUI(context);
+            exoPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+            exoPlayerView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+    }
+
+    private void hideSystemUI(Activity activity) {
+        // Set the IMMERSIVE flag.
+        // Set the content to appear under the system bars so that the content
+        // doesn't resize when the system bars hide and show.
+        activity.getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+    }
+
 }
