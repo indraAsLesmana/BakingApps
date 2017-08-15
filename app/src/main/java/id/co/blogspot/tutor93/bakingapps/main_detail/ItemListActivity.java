@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import id.co.blogspot.tutor93.bakingapps.R;
 
+import id.co.blogspot.tutor93.bakingapps.base.BaseActivity;
 import id.co.blogspot.tutor93.bakingapps.data.model.Ingredient;
 import id.co.blogspot.tutor93.bakingapps.data.model.Step;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
@@ -34,7 +35,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class ItemListActivity extends AppCompatActivity {
+public class ItemListActivity extends BaseActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -59,7 +60,10 @@ public class ItemListActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (!mItemBakingRespose.name.isEmpty()) getSupportActionBar().setTitle(mItemBakingRespose.name);
+        if (!mItemBakingRespose.name.isEmpty() && getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(mItemBakingRespose.name);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if (mIngredientList.size() > 0) {
             for (TextView tvIngredientView : mIngredientList) {
@@ -78,15 +82,6 @@ public class ItemListActivity extends AppCompatActivity {
                 }
             }
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         View recyclerView = findViewById(R.id.recipe_list);
         assert recyclerView != null;
