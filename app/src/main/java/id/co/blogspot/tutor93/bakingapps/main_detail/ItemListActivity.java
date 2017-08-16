@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +19,6 @@ import id.co.blogspot.tutor93.bakingapps.base.BaseActivity;
 import id.co.blogspot.tutor93.bakingapps.data.model.Ingredient;
 import id.co.blogspot.tutor93.bakingapps.data.model.Step;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
-import id.co.blogspot.tutor93.bakingapps.main_detail.dummy.DummyContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,22 +108,24 @@ public class ItemListActivity extends BaseActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_content, parent, false);
+                    .inflate(R.layout.item_stepcard, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(String.valueOf(mValues.get(position).id));
-            holder.mContentView.setText(mValues.get(position).description);
+            holder.mStepCount.setText(String.valueOf(
+                    holder.mView.getContext().getString(R.string.step_count,
+                            holder.mItem.id == 0 ? "Intro" : holder.mItem.id.toString())));
+            holder.mShortdescription.setText(mValues.get(position).shortDescription);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putParcelable(ItemDetailFragment.ARG_ITEM_ID, mItemBakingRespose);
+                        arguments.putParcelable(ItemDetailFragment.ARG_ITEM_ID, holder.mItem);
                         ItemDetailFragment fragment = new ItemDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -136,7 +134,7 @@ public class ItemListActivity extends BaseActivity {
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ItemDetailActivity.class);
-                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, mItemBakingRespose);
+                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem);
 
                         context.startActivity(intent);
                     }
@@ -151,20 +149,20 @@ public class ItemListActivity extends BaseActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
+            public final TextView mStepCount;
+            public final TextView mShortdescription;
             public Step mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mStepCount = (TextView) view.findViewById(R.id.step_count);
+                mShortdescription = (TextView) view.findViewById(R.id.tv_shortdescription);
             }
 
             @Override
             public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
+                return super.toString() + " '" + mShortdescription.getText() + "'";
             }
         }
     }

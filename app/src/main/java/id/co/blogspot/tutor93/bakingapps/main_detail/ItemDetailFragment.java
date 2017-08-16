@@ -48,6 +48,7 @@ import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
 
 import id.co.blogspot.tutor93.bakingapps.R;
+import id.co.blogspot.tutor93.bakingapps.data.model.Step;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main_detail.dummy.DummyContent;
 
@@ -67,7 +68,7 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private BakingResponse mItem;
+    private Step mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -130,8 +131,8 @@ public class ItemDetailFragment extends Fragment {
         exoPlayerView.setUseController(true);
         exoPlayerView.requestFocus();
 
-        if (!mItem.steps.get(0).videoURL.isEmpty()){
-            String videoUrl = mItem.steps.get(0).videoURL;
+        if (!mItem.videoURL.isEmpty()){
+            String videoUrl = mItem.videoURL;
             Uri uri = Uri.parse(videoUrl);
             MediaSource mediaSource = buildMediaSource(uri, "mp3");
             player.prepare(mediaSource);
