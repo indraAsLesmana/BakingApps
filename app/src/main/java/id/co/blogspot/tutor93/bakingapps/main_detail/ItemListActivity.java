@@ -23,26 +23,13 @@ import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * An activity representing a list of Items. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link ItemDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 public class ItemListActivity extends BaseActivity {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
     private boolean mTwoPane;
     public static final String ARG_RECIPES_ID = "recipe_id";
     private BakingResponse mItemBakingRespose;
     private ArrayList<TextView> mIngredientList = new ArrayList<>();
     private LinearLayout mIngridientListView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,25 +70,20 @@ public class ItemListActivity extends BaseActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
-        if (findViewById(R.id.item_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
-            mTwoPane = true;
-        }
+        if (findViewById(R.id.item_detail_container) != null) mTwoPane = true;
+
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(mItemBakingRespose.steps));
     }
 
-    public class SimpleItemRecyclerViewAdapter
+    class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final List<Step> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<Step> items) {
+        SimpleItemRecyclerViewAdapter(List<Step> items) {
             mValues = items;
         }
 
@@ -147,13 +129,13 @@ public class ItemListActivity extends BaseActivity {
             return mValues.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mStepCount;
-            public final TextView mShortdescription;
-            public Step mItem;
+        class ViewHolder extends RecyclerView.ViewHolder {
+            final View mView;
+            final TextView mStepCount;
+            final TextView mShortdescription;
+            Step mItem;
 
-            public ViewHolder(View view) {
+            ViewHolder(View view) {
                 super(view);
                 mView = view;
                 mStepCount = (TextView) view.findViewById(R.id.step_count);

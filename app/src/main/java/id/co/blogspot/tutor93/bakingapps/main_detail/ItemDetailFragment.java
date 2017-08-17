@@ -51,35 +51,19 @@ import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.model.Step;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
 import id.co.blogspot.tutor93.bakingapps.main_detail.dummy.DummyContent;
+import id.co.blogspot.tutor93.bakingapps.util.Helpers;
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link ItemListActivity}
- * in two-pane mode (on tablets) or a {@link ItemDetailActivity}
- * on handsets.
- */
 public class ItemDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
+
     public static final String ARG_ITEM_ID = "item_id";
-
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private Step mItem;
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     private AppCompatActivity mActivity;
     private SimpleExoPlayerView exoPlayerView;
     private SimpleExoPlayer player;
     private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
     private DataSource.Factory mediaDataSourceFactory;
     private Handler mainHandler;
+    private TextView detailStep;
     private static final String TAG = "ItemDetailFragment";
 
 
@@ -89,15 +73,7 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-//            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-            mItem = getArguments().getParcelable(ARG_ITEM_ID);
-        }
-
+        if (getArguments().containsKey(ARG_ITEM_ID)) mItem = getArguments().getParcelable(ARG_ITEM_ID);
     }
 
     @Override
@@ -114,6 +90,7 @@ public class ItemDetailFragment extends Fragment {
     private void initView(View rootview) {
         mActivity = (AppCompatActivity) getActivity();
 
+        detailStep = (TextView) rootview.findViewById(R.id.detail_step);
         exoPlayerView = (SimpleExoPlayerView) rootview.findViewById(R.id.exoPlayerView);
         mediaDataSourceFactory = buildDataSourceFactory(true);
 
@@ -131,12 +108,15 @@ public class ItemDetailFragment extends Fragment {
         exoPlayerView.setUseController(true);
         exoPlayerView.requestFocus();
 
-        if (!mItem.videoURL.isEmpty()){
+        if (!mItem.videoURL.isEmpty()) {
             String videoUrl = mItem.videoURL;
             Uri uri = Uri.parse(videoUrl);
             MediaSource mediaSource = buildMediaSource(uri, "mp3");
             player.prepare(mediaSource);
         }
+
+        if (!mItem.description.isEmpty()) detailStep.setText(mItem.description);
+
 
         player.addListener(new ExoPlayer.EventListener() {
             @Override public void onTimelineChanged(Timeline timeline, Object manifest) {
@@ -169,23 +149,10 @@ public class ItemDetailFragment extends Fragment {
     private void checkOrientation(Activity context) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE &&
                 !getResources().getBoolean(R.bool.isTablet)){
-            hideSystemUI(context);
+            Helpers.hideSystemUI(context);
             exoPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
             exoPlayerView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
-    }
-
-    private void hideSystemUI(Activity activity) {
-        // Set the IMMERSIVE flag.
-        // Set the content to appear under the system bars so that the content
-        // doesn't resize when the system bars hide and show.
-        activity.getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
     private MediaSource buildMediaSource(Uri uri, String overrideExtension) {

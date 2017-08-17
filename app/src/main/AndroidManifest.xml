@@ -22,14 +22,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main_detail.MainDetailActivity"
-            android:parentActivityName=".main.MainListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="id.co.blogspot.tutor93.bakingapps.main.MainListActivity" />
-        </activity>
-        <activity
             android:name=".main_detail.ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
