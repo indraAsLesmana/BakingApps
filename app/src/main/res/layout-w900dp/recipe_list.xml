@@ -7,13 +7,8 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="id.co.blogspot.tutor93.bakingapps.main_detail.ItemListActivity">
+    tools:context="id.co.blogspot.tutor93.bakingapps.main_detail.ItemDetailActivity">
 
-    <!--
-    This layout is a two-pane layout for the Items
-    master/detail flow.
-    
-    -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -23,7 +18,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:descendantFocusability="blocksDescendants"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/header_ingridient"

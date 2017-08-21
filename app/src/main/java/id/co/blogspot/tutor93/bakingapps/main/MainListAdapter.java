@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
-import id.co.blogspot.tutor93.bakingapps.main_detail.ItemListActivity;
+import id.co.blogspot.tutor93.bakingapps.main_detail.ItemDetailActivity;
 
 /**
  * Created by indraaguslesmana on 8/5/17.
@@ -46,8 +46,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, ItemListActivity.class);
-                intent.putExtra(ItemListActivity.ARG_RECIPES_ID, mItem);
+                Intent intent = new Intent(context, ItemDetailActivity.class);
+                intent.putExtra(ItemDetailActivity.ARG_RECIPES_ID, mItem);
                 context.startActivity(intent);
             }
         });

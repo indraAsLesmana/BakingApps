@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="id.co.blogspot.tutor93.bakingapps.main_detail.ItemListActivity"
+    tools:context="id.co.blogspot.tutor93.bakingapps.main_detail.ItemDetailActivity"
     tools:listitem="@layout/item_recipecard" />

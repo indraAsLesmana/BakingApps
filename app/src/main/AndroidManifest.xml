@@ -22,17 +22,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main_detail.ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
             android:name=".main_detail.ItemDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main_detail.ItemEndActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".main_detail.ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".main_detail.ItemDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="id.co.blogspot.tutor93.bakingapps.main_detail.ItemListActivity" />
+                android:value="id.co.blogspot.tutor93.bakingapps.main_detail.ItemDetailActivity" />
         </activity>
+
     </application>
 
 </manifest>
