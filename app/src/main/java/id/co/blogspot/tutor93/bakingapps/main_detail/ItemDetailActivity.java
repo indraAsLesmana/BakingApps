@@ -8,16 +8,12 @@ import id.co.blogspot.tutor93.bakingapps.base.BaseActivity;
 
 public class ItemDetailActivity extends BaseActivity {
 
+    private String title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
@@ -25,9 +21,21 @@ public class ItemDetailActivity extends BaseActivity {
                     getIntent().getParcelableExtra(ItemDetailFragment.ARG_ITEM_ID));
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
+
+            if (getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_NAME) != null) {
+                title = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_NAME);
+            }
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.item_detail_container, fragment)
                     .commit();
+        }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if (title != null) getSupportActionBar().setTitle(title);
         }
     }
 }

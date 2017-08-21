@@ -75,16 +75,18 @@ public class ItemListActivity extends BaseActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(mItemBakingRespose.steps));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(mItemBakingRespose.steps, mItemBakingRespose.name));
     }
 
     class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final List<Step> mValues;
+        private final String mRecipesName;
 
-        SimpleItemRecyclerViewAdapter(List<Step> items) {
+        SimpleItemRecyclerViewAdapter(List<Step> items, String recipesName) {
             mValues = items;
+            mRecipesName = recipesName;
         }
 
         @Override
@@ -108,6 +110,7 @@ public class ItemListActivity extends BaseActivity {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putParcelable(ItemDetailFragment.ARG_ITEM_ID, holder.mItem);
+                        arguments.putString(ItemDetailFragment.ARG_ITEM_NAME, mRecipesName);
                         ItemDetailFragment fragment = new ItemDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -117,7 +120,7 @@ public class ItemListActivity extends BaseActivity {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ItemDetailActivity.class);
                         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem);
-
+                        intent.putExtra(ItemDetailFragment.ARG_ITEM_NAME, mRecipesName);
                         context.startActivity(intent);
                     }
                 }

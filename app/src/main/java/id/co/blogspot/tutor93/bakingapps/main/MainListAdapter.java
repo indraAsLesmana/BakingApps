@@ -47,7 +47,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, ItemListActivity.class);
-                intent.putExtra(ItemListActivity.ARG_RECIPES_ID, mValues.get(position));
+                intent.putExtra(ItemListActivity.ARG_RECIPES_ID, mItem);
                 context.startActivity(intent);
             }
         });

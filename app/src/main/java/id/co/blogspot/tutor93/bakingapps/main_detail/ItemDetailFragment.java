@@ -1,11 +1,9 @@
 package id.co.blogspot.tutor93.bakingapps.main_detail;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -49,13 +47,12 @@ import com.google.android.exoplayer2.util.Util;
 
 import id.co.blogspot.tutor93.bakingapps.R;
 import id.co.blogspot.tutor93.bakingapps.data.model.Step;
-import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
-import id.co.blogspot.tutor93.bakingapps.main_detail.dummy.DummyContent;
 import id.co.blogspot.tutor93.bakingapps.util.Helpers;
 
 public class ItemDetailFragment extends Fragment {
 
     public static final String ARG_ITEM_ID = "item_id";
+    public static String ARG_ITEM_NAME = "recipes_name";
     private Step mItem;
     private AppCompatActivity mActivity;
     private SimpleExoPlayerView exoPlayerView;
