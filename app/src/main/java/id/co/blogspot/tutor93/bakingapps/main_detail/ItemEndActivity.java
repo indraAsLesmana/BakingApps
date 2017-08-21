@@ -59,7 +59,7 @@ public class ItemEndActivity extends BaseActivity implements ItemDetailFragment.
         fragment.setArguments(arguments);
         getSupportFragmentManager().beginTransaction()
                 .detach(oldFragment)
-                .replace(R.id.item_detail_container, fragment)
+                .replace(R.id.item_detail_container, fragment, "DetailFragment")
                 .commit();
     }
 
