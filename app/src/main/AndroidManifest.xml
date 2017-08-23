@@ -33,6 +33,19 @@
                 android:value="id.co.blogspot.tutor93.bakingapps.main_detail.ItemDetailActivity" />
         </activity>
 
+        <receiver android:name=".widget.BakingAppsWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_apps_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.BakingAppsIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>

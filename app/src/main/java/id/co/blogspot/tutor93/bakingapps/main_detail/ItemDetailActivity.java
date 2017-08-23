@@ -18,6 +18,7 @@ import id.co.blogspot.tutor93.bakingapps.base.BaseActivity;
 import id.co.blogspot.tutor93.bakingapps.data.model.Ingredient;
 import id.co.blogspot.tutor93.bakingapps.data.model.Step;
 import id.co.blogspot.tutor93.bakingapps.data.network.response.BakingResponse;
+import id.co.blogspot.tutor93.bakingapps.widget.BakingAppsIntentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,9 @@ public class ItemDetailActivity extends BaseActivity implements ItemDetailAdapte
         View recyclerView = findViewById(R.id.recipe_list);
         setupRecyclerView((RecyclerView) recyclerView);
         if (findViewById(R.id.item_detail_container) != null) mTwoPane = true;
+
+        //widget update here
+        BakingAppsIntentService.startBakingService(this, mItemBakingRespose.ingredients);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -81,7 +85,6 @@ public class ItemDetailActivity extends BaseActivity implements ItemDetailAdapte
     @Override
     public void onListItemClick(List<Step> stepsOut, int clickedItemIndex, String recipeName) {
         if (mTwoPane) {
-            // TODO : make twopane
             Bundle arguments = new Bundle();
             arguments.putParcelableArrayList(ItemDetailFragment.ARG_ITEM_ID, (ArrayList<? extends Parcelable>) stepsOut);
             arguments.putString(ItemDetailFragment.ARG_ITEM_NAME, recipeName);
@@ -92,7 +95,6 @@ public class ItemDetailActivity extends BaseActivity implements ItemDetailAdapte
                     .replace(R.id.item_detail_container, fragment)
                     .commit();
         } else {
-            // TODO : video with navigation... jump to itemEndActivity
             Intent intent = new Intent(this, ItemEndActivity.class);
             intent.putParcelableArrayListExtra(ItemDetailFragment.ARG_ITEM_ID, (ArrayList<? extends Parcelable>) stepsOut);
             intent.putExtra(ItemDetailFragment.ARG_ITEM_NAME, recipeName);
