@@ -70,6 +70,7 @@ public class ItemDetailFragment extends Fragment {
     private Handler mainHandler;
     private TextView detailStep;
     private static final String TAG = "ItemDetailFragment";
+    View rootView;
 
     private ListItemClickListener itemClickListener;
     private View nav;
@@ -92,7 +93,7 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         initView(rootView);
         if (!isTabletMode()){
@@ -287,5 +288,12 @@ public class ItemDetailFragment extends Fragment {
             player.stop();
             player.release();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isLanscapeMode() && !isTabletMode()) makeVideoFullScreen(mActivity);
+        initView(rootView);
     }
 }
