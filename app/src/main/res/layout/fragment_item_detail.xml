@@ -20,12 +20,12 @@
         android:id="@+id/detail_step"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/exoPlayerView"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="13dp"
         android:text="@string/app_name"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/image_detail"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:id="@+id/layout_navigation"
@@ -49,5 +49,13 @@
             android:layout_height="wrap_content"
             android:text="next" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exoPlayerView"
+        android:layout_centerHorizontal="true"
+        tools:background="@drawable/pizza" />
 
 </RelativeLayout>

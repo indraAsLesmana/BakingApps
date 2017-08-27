@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -41,7 +44,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         holder.mIdView.setText(mItem.name);
         holder.mServing.setText(String.valueOf(mItem.servings));
         holder.mStep.setText(String.valueOf(mItem.steps.size()));
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +53,13 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
+
+        if (!mItem.image.isEmpty())
+            Glide.with(holder.mView.getContext())
+                    .load(mItem.image)
+                    .error(R.drawable.pizza)
+                    .into(holder.imageRecipe);
+
     }
 
     @Override
@@ -63,6 +72,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         @BindView(R.id.detail_itemrecipename) TextView mIdView;
         @BindView(R.id.serving) TextView mServing;
         @BindView(R.id.step) TextView mStep;
+        @BindView(R.id.image_recipe) ImageView imageRecipe;
 
         ViewHolder(View view) {
             super(view);

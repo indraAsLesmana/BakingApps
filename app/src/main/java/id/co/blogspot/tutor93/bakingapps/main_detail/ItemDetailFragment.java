@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -74,6 +76,7 @@ public class ItemDetailFragment extends Fragment {
 
     private ListItemClickListener itemClickListener;
     private View nav;
+    private ImageView thumnailImage;
 
     public interface ListItemClickListener {
         void onListItemClick(List<Step> allSteps, int Index, String recipeName);
@@ -150,6 +153,7 @@ public class ItemDetailFragment extends Fragment {
         nav = rootview.findViewById(R.id.layout_navigation);
         detailStep = (TextView) rootview.findViewById(R.id.detail_step);
         exoPlayerView = (SimpleExoPlayerView) rootview.findViewById(R.id.exoPlayerView);
+        thumnailImage = (ImageView) rootview.findViewById(R.id.image_detail);
         mediaDataSourceFactory = buildDataSourceFactory(true);
 
         mainHandler = new Handler();
@@ -203,6 +207,11 @@ public class ItemDetailFragment extends Fragment {
             }
         });
 
+        if (!mItemList.get(mItemIndexSelected).thumbnailURL.isEmpty())
+            Glide.with(mActivity)
+                    .load(mItemList.get(mItemIndexSelected).thumbnailURL)
+                    .error(R.drawable.pizza)
+                    .into(thumnailImage);
     }
 
     private void makeVideoFullScreen(Activity context) {
